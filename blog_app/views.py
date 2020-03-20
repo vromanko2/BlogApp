@@ -1,17 +1,11 @@
 from django.shortcuts import render
 from .models import Blog, Post, UserSubscribers, NewsFeed
-from django.shortcuts import render
 from rest_framework import generics
 from .serializers import PostSerializer, BlogSerializer, NewsFeedSerializer, UserSubscribersSerializer, CurrentUserSerializer
 from rest_framework.response import Response
-from rest_framework.views import status, APIView
-from datetime import datetime, timedelta
-from django.db.models import Count
+from rest_framework.views import status
 from django.contrib.auth.models import User
-
-from django.http import HttpResponse
-from django.views import View
-
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -156,9 +150,6 @@ def delete_posts_from_news_feed(current_user, user_to_unsubscribe):
     print(current_user_news_feed)
     blog = Blog.objects.get(user=user_to_unsubscribe)
     user_to_delete_posts = Post.objects.filter(blog=blog)
-    # current_user_news_feed.posts = new_user_posts
-    # current_user_news_feed.save()
-    # print(str(current_user_news_feed.post))
     for post in user_to_delete_posts:
         post.news_feed = None
         print(post.news_feed)

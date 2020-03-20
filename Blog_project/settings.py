@@ -83,17 +83,28 @@ DATABASES = {
     }
 }
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': [
-#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-#     ]
-# }
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ]
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+
+
+# To send real emails, you should enter a real EMAIL_HOST_USER and EMAIL_HOST_PASSWORD. Just for debug, backends.console suits okay.
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'veronika.romanko@gmail.com'
+# EMAIL_HOST_PASSWORD = '##password here##'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_SUBJECT_PREFIX = '[Test mail]'
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
