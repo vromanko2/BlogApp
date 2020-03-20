@@ -53,7 +53,6 @@ class Post(models.Model):
             super(Post, self).save(*args, **kwargs)
 
         all_this_author_posts = Post.objects.filter(author=self.author)
-        print(all_this_author_posts)
         people = []
         for post in all_this_author_posts:
             news_feed = post.news_feed
@@ -61,34 +60,18 @@ class Post(models.Model):
                 people.append(news_feed.user.id)
         people = list(set(people))
         people_qs = User.objects.filter(id__in=people)
-        print(people_qs)
         for user in people_qs:
             if user.email:
                 send_mail(
                     'New post',
-                    'User created a new post',
+                    'User {} created a new post'.format(user.username),
                     self.author.email,
                     [user.email],
                     fail_silently=False
                 )
-            print(user.email)
-
-        # user_news_feed = NewsFeed.objects.get(user=self.author)
-        # print(self.author)
-        # posts = Post.objects.filter(news_feed=user_news_feed)
-        # print(posts)
-        # people = []
-        # for post in posts:
-        #     people.append(post.author)
-        # print(people)
-
-        # send_mail(
-        #     'New post',
-        #     'User created a new post',
-        #     'from@example.com',
-        #     ['to@example.com'],
-        #     fail_silently=False
-        # )
+            user_news_feed = NewsFeed.objects.get(user=user)
+            self.news_feed = user_news_feed
+            super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
