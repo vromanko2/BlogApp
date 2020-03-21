@@ -16,7 +16,10 @@
 ##### And add some posts to a blog 
 ##### http://127.0.0.1:8000/admin/blog_app/blog/
 
-##### Trully speaking, front-end is quite bad, sorry for that. But to test the app with a front-end:
+##### But to test the app with a front-end:
+##### git clone https://github.com/vromanko2/BlogAppFront-end.git
+##### cd BlogAppFront-end
+##### docker-compose up --build
 
 
 
