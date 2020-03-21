@@ -16,7 +16,7 @@
 #####   And add some posts to a blog 
 #####   http://127.0.0.1:8000/admin/blog_app/blog/
 
-##### To test the app with a front-end:
+### To test the app with a front-end:
 #####   git clone https://github.com/vromanko2/BlogAppFront-end.git
 #####   cd BlogAppFront-end
 #####   docker-compose up --build
