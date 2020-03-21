@@ -18,7 +18,7 @@ class BlogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blog
-        fields = ('post', 'user')
+        fields = ('user', 'post')
 
 
 class NewsFeedSerializer(serializers.ModelSerializer):

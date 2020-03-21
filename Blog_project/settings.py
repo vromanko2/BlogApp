@@ -25,7 +25,7 @@ SECRET_KEY = 'x!5f+6t&^$w9fkz9i!h)gf%!b8v%3q-2)lf%d7o959)v*o_zww'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'blog_app'
+    'blog_app',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -49,7 +50,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsPostCsrfMiddleware'
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:3000',
+#     'http://127.0.0.1:3000'
+# ]
 
 ROOT_URLCONF = 'Blog_project.urls'
 
@@ -83,10 +95,9 @@ DATABASES = {
     }
 }
 
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
     ]
 }
 

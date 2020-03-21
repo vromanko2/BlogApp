@@ -180,3 +180,27 @@ class UserNewsFeedView(generics.RetrieveUpdateDestroyAPIView):
                 },
                 status=status.HTTP_404_NOT_FOUND
             )
+
+
+class CreatePostView(generics.RetrieveUpdateDestroyAPIView):
+    """
+                GET user/:pk/post_create/
+    """
+
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+    def post(self, request, *args, **kwargs):
+        try:
+            current_user = User.objects.get(pk=kwargs['pk'])
+            post = Post(title=request.data['title'], text=request.data['text'],
+                                       blog=Blog.objects.get(user=current_user))
+            post.save()
+            return Response(status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response(
+                data={
+                    "message": "User with id: {} does not exist".format(kwargs['pk'])
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )
